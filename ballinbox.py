@@ -16,8 +16,6 @@ def ball_in_box(m,blockers):
     y.append(1)
     x.sort()
     y.sort()
-    print(x)
-    print(y)
     for j in range(len(y)-1):
         for i in range(len(x)-1):
             running=True
@@ -28,9 +26,7 @@ def ball_in_box(m,blockers):
             if running:
                 c0=((x[i+1]+x[i])/2.0,(y[j+1]+y[j])/2.0,min(x[i+1]-x[i],y[j+1]-y[j])/2.0)
                 lim=[(x[i],y[j]),(x[i+1],y[j+1])]
-                print('add1 circles',c0,circles)
                 circles.append(c0)
-                print('add2 already',lim,already)
                 limx=lim.copy()
                 already.append(limx)
                 while running:
@@ -58,20 +54,14 @@ def ball_in_box(m,blockers):
                                         break
                                 break
                     if add:
-                        print('del3 circles',circles[-1],circles)
                         del circles[-1]
-                        print('add4 circles',c1,circles)
                         circles.append(c1)
-                        print('del5 already',already[-1],already)
                         del already[-1]
-                        print('add6 already',lim,already)
                         limx=lim.copy()
                         already.append(limx)
                     else:
                         running=False
-    print('already:',already)
     circles0=[]
-    print(circles)
     for k in range(m):
         biggest=circles[0]
         biggestindex=0
@@ -82,12 +72,3 @@ def ball_in_box(m,blockers):
         circles0.append(circles[biggestindex])
         del circles[biggestindex]
     return circles0
-ex=[(0.5,0.5),(0.5,-0.5),(0.5,0.3)]
-print(ex)
-os=ball_in_box(5,ex)
-print(os)
-mul=0
-for circles in os:
-    mul=math.pi*circles[2]**2+mul
-print(mul)
-print(mul/4)
